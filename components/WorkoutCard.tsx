@@ -12,14 +12,14 @@ const WorkoutCard: React.FC<Props> = ({}) => {
 
   const router = useRouter();
   return (
-    <Pressable className="bg-secondary dark:bg-[#1C1C1E] flex gap-2 p-5 rounded-lg mb-5">
+    <Pressable className="bg-secondary flex gap-2 p-5 rounded-lg mb-5">
       <View>
-        <Text className="text-text font-semibold dark:text-darkText">Pull</Text>
-        <Text className="text-text font-semibold dark:text-darkText opacity-40">
+        <Text className="text-text font-semibold">Pull</Text>
+        <Text className="text-text font-semibold opacity-40">
           Warm Up, Lat Pulldown (Cable), Seated Cable Row - V Grip (Cable)
         </Text>
         <Button onPress={() => setModalVisible(true)} className="mt-3">
-          <Text className="text-darkText font-medium">Start Workout</Text>
+          <Text className="text-textWhite font-semibold">Start Workout</Text>
         </Button>
         <Modal
           visible={modalVisible}
@@ -27,7 +27,10 @@ const WorkoutCard: React.FC<Props> = ({}) => {
           presentationStyle="pageSheet"
           onRequestClose={() => setModalVisible(false)}
         >
-          <ActiveWorkout></ActiveWorkout>
+          <ActiveWorkout
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          ></ActiveWorkout>
         </Modal>
       </View>
     </Pressable>

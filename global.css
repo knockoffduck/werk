@@ -8,20 +8,37 @@
         --text: #333; /* Dark gray for readability on light background */
         --background: #f7fafc; /* Very light gray/off-white */
         --primary: #2e93ff; /* A medium bright blue for primary actions */
-        --secondary: #f2f2f2; /* A neutral gray for secondary elements/borders */
-        --accent: #38a169; /* A vibrant green for accent elements */
-        --dark-text: #fff; /* Light gray text */
-        --dark-background: #1a202c; /* Very dark background */
-        --dark-primary: #447de2; /* The blue button color observed */
-        --dark-secondary: #1c1c1e; /* A slightly lighter dark gray for borders or subtle elements */
-        --dark-accent: #48bb78; /* A vibrant green for accent elements */
+        --secondary: #e5e5e5; /* A neutral gray for secondary elements/borders */
+        --accent: #2cc75e; /* A vibrant green for accent elements */
+        --text-white: #fff;
+        --text-black: #333;
+
+        /* Light Theme RGB Values */
+        --text-rgb: 51, 51, 51;
+        --background-rgb: 247, 250, 252;
+        --primary-rgb: 46, 147, 255;
+        --secondary-rgb: 229, 229, 229;
+        --accent-rgb: 44, 199, 94;
+        --text-white-rgb: 255, 255, 255;
+        --text-black-rgb: 51, 51, 51;
     }
     .dark {
         /* Dark Theme - Matc hing your designs as closely as possible */
         --text: #fff; /* Light gray text */
-        --background: #1a202c; /* Very dark background */
+        --background: #000; /* Very dark background */
         --primary: #447de2; /* The blue button color observed */
-        --secondary: #1c1c1e; /* A slightly lighter dark gray for borders or subtle elements */
+        --secondary: #2f2f2f; /* A slightly lighter dark gray for borders or subtle elements */
         --accent: #48bb78; /* A suitable green accent for dark mode */
+        --text-white: #fff;
+        --text-black: #333;
+
+        /* Dark Theme RGB Values */
+        --text-rgb: 255, 255, 255;
+        --background-rgb: 0, 0, 0;
+        --primary-rgb: 68, 125, 226;
+        --secondary-rgb: 47, 47, 47;
+        --accent-rgb: 72, 187, 120;
+        --text-white-rgb: 255, 255, 255;
+        --text-black-rgb: 51, 51, 51;
     }
 }

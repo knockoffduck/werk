@@ -9,12 +9,13 @@ import {
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 import { NAV_THEME } from "~/lib/constants";
 import { useColorScheme } from "~/lib/useColorScheme";
 import { PortalHost } from "@rn-primitives/portal";
 import { ThemeToggle } from "~/components/ThemeToggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
+import { cn } from "~/lib/utils";
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -52,22 +53,25 @@ export default function RootLayout() {
   if (!isColorSchemeLoaded) {
     return null;
   }
+  const rootClassName = isDarkColorScheme ? "dark" : "";
 
   return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <Stack>
-        {/* Add this Stack.Screen for your (tabs) layout */}
-        {/* The name should match the directory name */}
-        {/* headerShown: false prevents the root stack from adding a header for this route */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    <View className={cn(rootClassName)} style={{ flex: 1 }}>
+      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+        <Stack>
+          {/* Add this Stack.Screen for your (tabs) layout */}
+          {/* The name should match the directory name */}
+          {/* headerShown: false prevents the root stack from adding a header for this route */}
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-        {/* Add other Stack.Screen components for any other routes not in (tabs) */}
+          {/* Add other Stack.Screen components for any other routes not in (tabs) */}
 
-        {/* e.g., <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
-      </Stack>
-      <PortalHost />
-    </ThemeProvider>
+          {/* e.g., <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
+        </Stack>
+        <PortalHost />
+      </ThemeProvider>
+    </View>
   );
 }
 
