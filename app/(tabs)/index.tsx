@@ -10,10 +10,10 @@ export default function Tab() {
   return (
     <View className="flex p-5 gap-4">
       <Button className="flex flex-row gap-3">
-        <Plus className="text-text"></Plus>
-        <Text className="text-text font-semibold">Start Empty Workout</Text>
+        <Plus className="text-darkText"></Plus>
+        <Text className="text-darkText font-semibold">Start Empty Workout</Text>
       </Button>
-      <Text className="text-xl font-semibold text-black dark:text-text">
+      <Text className="text-xl font-semibold text-text dark:text-darkText">
         Recent Workouts
       </Text>
       <ScrollView className="flex flex-col">

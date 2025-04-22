@@ -6,6 +6,18 @@ module.exports = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
+    colors: {
+      background: "var(--background)",
+      text: "var(--text)",
+      primary: "var(--primary)",
+      secondary: "var(--secondary)",
+      accent: "var(--accent)",
+      darkBackground: "var(--dark-background)",
+      darkText: "var(--dark-text)",
+      darkPrimary: "var(--dark-primary)",
+      darkSecondary: "var(--dark-secondary)",
+      darkAccent: "var(--dark-accent)",
+    },
     extend: {
       colors: {
         text: "var(--text)",

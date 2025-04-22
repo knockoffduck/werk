@@ -5,11 +5,16 @@
 @layer base {
     :root {
         /* Light Theme */
-        --text: #fff; /* Dark gray for readability on light background */
+        --text: #333; /* Dark gray for readability on light background */
         --background: #f7fafc; /* Very light gray/off-white */
         --primary: #2e93ff; /* A medium bright blue for primary actions */
         --secondary: #f2f2f2; /* A neutral gray for secondary elements/borders */
         --accent: #38a169; /* A vibrant green for accent elements */
+        --dark-text: #fff; /* Light gray text */
+        --dark-background: #1a202c; /* Very dark background */
+        --dark-primary: #447de2; /* The blue button color observed */
+        --dark-secondary: #1c1c1e; /* A slightly lighter dark gray for borders or subtle elements */
+        --dark-accent: #48bb78; /* A vibrant green for accent elements */
     }
     .dark {
         /* Dark Theme - Matc hing your designs as closely as possible */
