@@ -2,17 +2,30 @@ import React from "react";
 import { Ellipsis } from "~/lib/icons/Ellipsis";
 import { Check } from "~/lib/icons/Check";
 import { Plus } from "~/lib/icons/Plus";
-import { Pressable, Text, useWindowDimensions, View } from "react-native";
+import {
+  Pressable,
+  Text,
+  TextInput,
+  useWindowDimensions,
+  View,
+} from "react-native";
 
 import { Box } from "./ui/box";
 import { tv } from "tailwind-variants";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 interface Props {}
 
 const tableCell = tv({
-  base: "flex items-center justify-center rounded-md",
+  base: "flex items-center justify-center rounded-md text-text text-lg font-bold text-center",
   variants: {
+    opacity: {
+      100: "opacity-100",
+      75: "opacity-75",
+      50: "opacity-50",
+      25: "opacity-25",
+    },
     size: {
       set: "w-10",
       previous: "w-28",
@@ -27,11 +40,12 @@ const tableCell = tv({
   },
   defaultVariants: {
     background: "none",
+    opacity: 100,
   },
 });
 
 const tableCellText = tv({
-  base: "text-text font-bold",
+  base: "text-text font-bold w-full flex items-start justify-center text-center p-0 pt-0 bg-transparent border-0",
   variants: {
     size: {
       small: "text-sm",
@@ -93,11 +107,22 @@ const ExerciseTable = ({}) => {
             <View className={tableCell({ size: "previous" })}>
               <Text className={tableCellText()}>100 kg x 7</Text>
             </View>
-            <View className={tableCell({ size: "kg" })}>
-              <Text className={tableCellText()}>100</Text>
+            <View
+              className={tableCell({ size: "kg", background: "secondary" })}
+            >
+              <Input
+                className={tableCellText()}
+                defaultValue="100"
+                selectTextOnFocus={true}
+              ></Input>
             </View>
             <View className={tableCell({ size: "reps" })}>
-              <Text className={tableCellText()}>10</Text>
+              <Input
+                className={tableCellText()}
+                inputMode="decimal"
+                defaultValue="100"
+                selectTextOnFocus={true}
+              ></Input>
             </View>
             <Pressable className={tableCell({ size: "check" })}>
               <View className="bg-accent px-[0.30rem] py-[0.10rem] rounded-md">
@@ -119,10 +144,18 @@ const ExerciseTable = ({}) => {
               <Text className={tableCellText()}>100 kg x 7</Text>
             </View>
             <View className={tableCell({ size: "kg" })}>
-              <Text className={tableCellText()}>100</Text>
+              <Input
+                className={tableCellText()}
+                defaultValue="8"
+                selectTextOnFocus={true}
+              ></Input>
             </View>
             <View className={tableCell({ size: "reps" })}>
-              <Text className={tableCellText()}>10</Text>
+              <Input
+                className={tableCellText()}
+                defaultValue="8"
+                selectTextOnFocus={true}
+              ></Input>
             </View>
             <View className={tableCell({ size: "check" })}>
               <Check
@@ -144,12 +177,20 @@ const ExerciseTable = ({}) => {
             <View
               className={tableCell({ size: "kg", background: "secondary" })}
             >
-              <Text className={tableCellText({ opacity: 50 })}>0</Text>
+              <Input
+                className={tableCellText({ opacity: 50 })}
+                defaultValue="100"
+                selectTextOnFocus={true}
+              ></Input>
             </View>
             <View
               className={tableCell({ size: "reps", background: "secondary" })}
             >
-              <Text className={tableCellText()}>8</Text>
+              <Input
+                className={tableCellText()}
+                defaultValue="8"
+                selectTextOnFocus={true}
+              ></Input>
             </View>
             <View className={tableCell({ size: "check" })}>
               <Check

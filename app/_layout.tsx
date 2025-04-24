@@ -16,6 +16,7 @@ import { PortalHost } from "@rn-primitives/portal";
 import { ThemeToggle } from "~/components/ThemeToggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
 import { cn } from "~/lib/utils";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -55,22 +56,26 @@ export default function RootLayout() {
   }
   const rootClassName = isDarkColorScheme ? "dark" : "";
 
+  const queryClient = new QueryClient();
+
   return (
     <View className={cn(rootClassName)} style={{ flex: 1 }}>
-      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-        <Stack>
-          {/* Add this Stack.Screen for your (tabs) layout */}
-          {/* The name should match the directory name */}
-          {/* headerShown: false prevents the root stack from adding a header for this route */}
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+          <Stack>
+            {/* Add this Stack.Screen for your (tabs) layout */}
+            {/* The name should match the directory name */}
+            {/* headerShown: false prevents the root stack from adding a header for this route */}
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-          {/* Add other Stack.Screen components for any other routes not in (tabs) */}
+            {/* Add other Stack.Screen components for any other routes not in (tabs) */}
 
-          {/* e.g., <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
-        </Stack>
-        <PortalHost />
-      </ThemeProvider>
+            {/* e.g., <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
+          </Stack>
+          <PortalHost />
+        </ThemeProvider>
+      </QueryClientProvider>
     </View>
   );
 }
