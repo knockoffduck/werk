@@ -7,7 +7,7 @@ import ActiveWorkout from "./ActiveWorkout";
 
 interface Props {
   workoutTemplateInfo: {
-    workoutTemplateId: number;
+    id: number;
     workoutName: string;
     exercises: { exerciseId: number; exerciseName: string }[];
   };

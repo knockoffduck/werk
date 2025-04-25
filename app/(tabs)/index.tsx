@@ -5,22 +5,10 @@ import { View, Text, StyleSheet } from "react-native";
 import ActiveWorkout from "~/components/ActiveWorkout";
 import { Button } from "~/components/ui/button";
 import WorkoutCard from "~/components/WorkoutCard";
+import { fetchWorkoutTemplates } from "~/lib/fetchData";
 import { Plus } from "~/lib/icons/Plus";
+import { storage } from "~/lib/storage/mmkv";
 import { useColorScheme } from "~/lib/useColorScheme";
-
-const fetchWorkoutTemplates = async () => {
-  const response = await fetch(
-    "http://localhost:3000/api/v1/templates/workouts",
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch workout templates");
-  }
-  const result = await response.json();
-
-  if (!result.success || !result.data) throw new Error(result.message);
-
-  return result.data;
-};
 
 export default function Tab() {
   const queryClient = useQueryClient();
@@ -55,10 +43,7 @@ export default function Tab() {
       <ScrollView className="flex flex-col">
         {data &&
           data.map((workout: any) => (
-            <WorkoutCard
-              key={workout.workoutTemplateId}
-              workoutTemplateInfo={workout}
-            />
+            <WorkoutCard key={workout.id} workoutTemplateInfo={workout} />
           ))}
       </ScrollView>
       <Modal

@@ -1,5 +1,5 @@
 export type ExerciseProps = {
-  exerciseId: string;
+  id: string;
   name: string;
   category: string;
 };
