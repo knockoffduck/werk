@@ -1,6 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Pressable, ScrollView } from "react-native";
+import { useState } from "react";
+import { Modal, Pressable, ScrollView } from "react-native";
 import { View, Text, StyleSheet } from "react-native";
+import ActiveWorkout from "~/components/ActiveWorkout";
 import { Button } from "~/components/ui/button";
 import WorkoutCard from "~/components/WorkoutCard";
 import { Plus } from "~/lib/icons/Plus";
@@ -23,8 +25,10 @@ const fetchWorkoutTemplates = async () => {
 export default function Tab() {
   const queryClient = useQueryClient();
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["data"],
+    queryKey: ["workoutTemplates"],
     queryFn: fetchWorkoutTemplates,
   });
 
@@ -35,11 +39,13 @@ export default function Tab() {
   if (error) {
     return <Text>Error: {error.message}</Text>;
   }
-  console.log(data);
 
   return (
     <View className="flex p-5 gap-4">
-      <Button className="flex flex-row gap-3">
+      <Button
+        className="flex flex-row gap-3"
+        onPress={() => setModalVisible(true)}
+      >
         <Plus className="text-textWhite"></Plus>
         <Text className="text-textWhite font-semibold">
           Start Empty Workout
@@ -55,6 +61,17 @@ export default function Tab() {
             />
           ))}
       </ScrollView>
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <ActiveWorkout
+          setModalVisible={setModalVisible}
+          modalVisible={modalVisible}
+        ></ActiveWorkout>
+      </Modal>
     </View>
   );
 }

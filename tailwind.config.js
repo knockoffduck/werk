@@ -16,6 +16,7 @@ module.exports = {
       primary: "var(--primary)",
       secondary: "var(--secondary)",
       accent: "var(--accent)",
+      error: "var(--error)",
       textBlack: "var(--text-black)",
       textWhite: "var(--text-white)",
 
@@ -54,6 +55,18 @@ module.exports = {
       "accent-80": "rgba(var(--accent-rgb), 0.8)",
       "accent-90": "rgba(var(--accent-rgb), 0.9)",
       "accent-95": "rgba(var(--accent-rgb), 0.95)",
+
+      // Error with Opacity
+      "error-10": "rgba(var(--error-rgb), 0.1)",
+      "error-20": "rgba(var(--error-rgb), 0.2)",
+      "error-30": "rgba(var(--error-rgb), 0.3)",
+      "error-40": "rgba(var(--error-rgb), 0.4)",
+      "error-50": "rgba(var(--error-rgb), 0.5)",
+      "error-60": "rgba(var(--error-rgb), 0.6)",
+      "error-70": "rgba(var(--error-rgb), 0.7)",
+      "error-80": "rgba(var(--error-rgb), 0.8)",
+      "error-90": "rgba(var(--error-rgb), 0.9)",
+      "error-95": "rgba(var(--error-rgb), 0.95)",
 
       // Background with Opacity
       "background-10": "rgba(var(--background-rgb), 0.1)",

@@ -1,11 +1,14 @@
 // app/modal.tsx
 import { View, Text, Pressable, ScrollView } from "react-native";
+import Modal from "react-native-modal";
 import { Link, Stack, useRouter } from "expo-router";
 import { Button } from "./ui/button";
+import { X as Close } from "~/lib/icons/Close";
 import { Ellipsis } from "~/lib/icons/Ellipsis";
 import { Timer } from "~/lib/icons/Timer";
 import React from "react";
 import ExerciseTable from "~/components/ExerciseTable";
+import AddExercise from "./AddExercise";
 
 interface Props {
   modalVisible: boolean;
@@ -16,6 +19,9 @@ export default function ActiveWorkout({
   modalVisible,
   setModalVisible,
 }: Props) {
+  const [addExerciseModalVisible, setAddExerciseModalVisible] =
+    React.useState(false);
+
   return (
     <View className="bg-background flex items-center w-full h-full pt-3">
       <Pressable
@@ -52,7 +58,27 @@ export default function ActiveWorkout({
           <View>
             <ExerciseTable></ExerciseTable>
           </View>
+
+          <View className="flex flex-col gap-6 px-5">
+            <Button
+              className="mt-16 bg-primary-30"
+              onPress={() => setAddExerciseModalVisible(true)}
+            >
+              <Text className="text-primary text-lg font-semibold leading-[20px]">
+                Add Exercises
+              </Text>
+            </Button>
+            <Button className="bg-error-30">
+              <Text className="text-error text-lg font-semibold leading-[20px]">
+                Cancel Workout
+              </Text>
+            </Button>
+          </View>
         </ScrollView>
+        <AddExercise
+          addExerciseModalVisible={addExerciseModalVisible}
+          setAddExerciseModalVisible={setAddExerciseModalVisible}
+        ></AddExercise>
       </View>
     </View>
   );
