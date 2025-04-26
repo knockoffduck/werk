@@ -6,10 +6,13 @@ import {
   SectionList,
   FlatList,
   Pressable,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { fetchExercises } from "~/lib/fetchData";
+import { storage } from "~/lib/storage/mmkv";
 import { ExerciseProps } from "~/types/exercises";
 
 export default function Tab() {
@@ -27,9 +30,17 @@ export default function Tab() {
   if (error) {
     return <Text>Error: {error.message}</Text>;
   }
-  console.log(data);
+
+  const handleSync = () => {
+    storage.set("exercises", JSON.stringify(data));
+    console.log(
+      "Exercises synced successfully",
+      storage.getString("exercises"),
+    );
+  };
+
   return (
-    <View>
+    <View className="relative h-full">
       <View className="p-5 border-b-[0.25px] border-[#3D3D3D]">
         <Input
           className="bg-secondary text-text border-0"
@@ -52,6 +63,19 @@ export default function Tab() {
           )}
         />
       )}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        className="absolute bottom-5 w-full flex items-center"
+      >
+        <Pressable
+          className="bg-primary px-24 py-4 active:opacity-90 rounded-lg"
+          onPress={() => handleSync()}
+        >
+          <Text className="text-textWhite font-semibold text-lg leading-5">
+            Sync Exercises
+          </Text>
+        </Pressable>
+      </KeyboardAvoidingView>
     </View>
   );
 }

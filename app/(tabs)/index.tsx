@@ -10,13 +10,14 @@ import { Plus } from "~/lib/icons/Plus";
 import { v4 as uuidv4 } from "uuid";
 import { getWorkouts, setWorkouts, Workout } from "~/lib/storage/storage";
 import { storage } from "~/lib/storage/mmkv";
+import { ActiveWorkout as ActiveWorkoutType } from "~/types/workouts";
 
 export default function Tab() {
   const queryClient = useQueryClient();
   const [modalVisible, setModalVisible] = useState(false);
 
   const startNewWorkout = () => {
-    const newWorkout: Workout = {
+    const newWorkout: ActiveWorkoutType = {
       id: uuidv4(),
       templateId: null,
       name: "",
@@ -27,14 +28,12 @@ export default function Tab() {
       prsAchieved: 0,
       isSynced: false,
       isDeleted: false,
+      exercises: [],
     };
-    storage.set("currentWorkoutId", newWorkout.id);
+
+    storage.set("currentWorkout", JSON.stringify(newWorkout));
 
     // Get existing workouts or initialize an empty array
-    const existingWorkouts = getWorkouts();
-    const updatedWorkouts = [...existingWorkouts, newWorkout];
-    setWorkouts(updatedWorkouts);
-    console.log("workouts", getWorkouts());
     setModalVisible(true);
   };
 
@@ -50,7 +49,6 @@ export default function Tab() {
   if (error) {
     return <Text>Error: {error.message}</Text>;
   }
-  console.log("here", data);
 
   return (
     <View className="flex p-5 gap-4">

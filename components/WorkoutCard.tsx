@@ -1,6 +1,5 @@
-import { Pressable } from "@rn-primitives/slot";
 import React from "react";
-import { Modal, Text, View } from "react-native";
+import { Modal, Text, View, Pressable } from "react-native";
 import { Button } from "./ui/button";
 import { Link, useRouter } from "expo-router";
 import ActiveWorkout from "./ActiveWorkout";
