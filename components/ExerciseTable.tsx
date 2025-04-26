@@ -107,9 +107,7 @@ const ExerciseTable = ({}) => {
             <View className={tableCell({ size: "previous" })}>
               <Text className={tableCellText()}>100 kg x 7</Text>
             </View>
-            <View
-              className={tableCell({ size: "kg", background: "secondary" })}
-            >
+            <View className={tableCell({ size: "kg" })}>
               <Input
                 className={tableCellText()}
                 defaultValue="100"
@@ -133,72 +131,6 @@ const ExerciseTable = ({}) => {
                 ></Check>
               </View>
             </Pressable>
-          </View>
-        </View>
-        <View>
-          <View className="flex flex-row w-full justify-between py-3 px-5">
-            <View className={tableCell({ size: "set" })}>
-              <Text className={tableCellText()}>1</Text>
-            </View>
-            <View className={tableCell({ size: "previous" })}>
-              <Text className={tableCellText()}>100 kg x 7</Text>
-            </View>
-            <View className={tableCell({ size: "kg" })}>
-              <Input
-                className={tableCellText()}
-                defaultValue="8"
-                selectTextOnFocus={true}
-              ></Input>
-            </View>
-            <View className={tableCell({ size: "reps" })}>
-              <Input
-                className={tableCellText()}
-                defaultValue="8"
-                selectTextOnFocus={true}
-              ></Input>
-            </View>
-            <View className={tableCell({ size: "check" })}>
-              <Check
-                strokeWidth={3}
-                size={20}
-                className={tableCellText()}
-              ></Check>
-            </View>
-          </View>
-        </View>
-        <View>
-          <View className="flex flex-row w-full justify-between py-3 px-5">
-            <View className={tableCell({ size: "set" })}>
-              <Text className={tableCellText()}>1</Text>
-            </View>
-            <View className={tableCell({ size: "previous" })}>
-              <Text className={tableCellText()}>No Previous</Text>
-            </View>
-            <View
-              className={tableCell({ size: "kg", background: "secondary" })}
-            >
-              <Input
-                className={tableCellText({ opacity: 50 })}
-                defaultValue="100"
-                selectTextOnFocus={true}
-              ></Input>
-            </View>
-            <View
-              className={tableCell({ size: "reps", background: "secondary" })}
-            >
-              <Input
-                className={tableCellText()}
-                defaultValue="8"
-                selectTextOnFocus={true}
-              ></Input>
-            </View>
-            <View className={tableCell({ size: "check" })}>
-              <Check
-                strokeWidth={3}
-                size={20}
-                className={tableCellText()}
-              ></Check>
-            </View>
           </View>
         </View>
       </View>

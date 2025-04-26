@@ -1,14 +1,20 @@
 // app/modal.tsx
-import { View, Text, Pressable, ScrollView } from "react-native";
-import Modal from "react-native-modal";
-import { Link, Stack, useRouter } from "expo-router";
+import { View, Text, Pressable, ScrollView, TextInput } from "react-native";
 import { Button } from "./ui/button";
-import { X as Close } from "~/lib/icons/Close";
-import { Ellipsis } from "~/lib/icons/Ellipsis";
 import { Timer } from "~/lib/icons/Timer";
+import { CalendarDays } from "~/lib/icons/CalendarDays";
+import { Clock } from "~/lib/icons/Clock";
 import React from "react";
 import ExerciseTable from "~/components/ExerciseTable";
 import AddExercise from "./AddExercise";
+import { v4 as uuidv4 } from "uuid";
+import { template } from "@babel/core";
+import {
+  getWorkouts,
+  setWorkouts,
+  StorageKeys,
+  Workout,
+} from "~/lib/storage/storage";
 
 interface Props {
   modalVisible: boolean;
@@ -22,13 +28,37 @@ export default function ActiveWorkout({
   const [addExerciseModalVisible, setAddExerciseModalVisible] =
     React.useState(false);
 
+  const newWorkout: Workout = {
+    id: uuidv4(),
+    templateId: null,
+    name: "",
+    startTime: new Date().toISOString(),
+    endTime: null,
+    durationSeconds: null,
+    totalVolumeKg: 0,
+    prsAchieved: 0,
+    isSynced: false,
+    isDeleted: false,
+  };
+
+  // Get existing workouts or initialize an empty array
+  const existingWorkouts = getWorkouts();
+  const updatedWorkouts = [...existingWorkouts, newWorkout];
+  setWorkouts(updatedWorkouts);
+  console.log("workouts", getWorkouts());
+
+  const handleCancelWorkout = () => {
+    setWorkouts(existingWorkouts);
+    console.log(getWorkouts());
+  };
+
   return (
     <View className="bg-background flex items-center w-full h-full pt-3">
       <Pressable
         onPress={() => setModalVisible(false)}
         className="h-1 w-12 bg-[#7E7E7E] rounded-xl mb-2"
       ></Pressable>
-      <View className="flex">
+      <View className="flex w-full">
         <View className="w-full flex flex-row justify-between px-5 mb-5">
           <Button className="bg-secondary rounded-lg">
             <Timer strokeWidth={2.5} className="text-text "></Timer>
@@ -40,24 +70,33 @@ export default function ActiveWorkout({
         <ScrollView>
           <View className="flex w-full px-5 mb-5">
             <View>
-              <Text className="text-text text-3xl font-bold dark:text-darkText">
-                Monday Session
-              </Text>
-              <Text className="text-text text-xl font-medium dark:text-darkText opacity-50 mt-1">
-                Morning Pull Routine
-              </Text>
-              <Text className="text-text text-xl font-semibold dark:text-darkText mt-1">
-                00:11:11
-              </Text>
-              <Text className="text-text text-xl font-medium dark:text-darkText mt-1">
-                Just a standard Monday workout. Felt weaker than last week.
-              </Text>
+              <TextInput
+                placeholder="Workout Name"
+                className="text-text text-3xl font-bold border-0 border-transparent ring-0 focus:border-transparent focus:ring-0 "
+              ></TextInput>
+              <View className="flex flex-row items-center gap-3 mt-2">
+                <CalendarDays
+                  strokeWidth={1.5}
+                  className="text-text-80 "
+                ></CalendarDays>
+                <Text className="text-text-80 text-lg font-medium">
+                  {new Date().toLocaleDateString("en-AU", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </Text>
+              </View>
+              <View className="flex flex-row items-center gap-3 mt-2">
+                <Clock strokeWidth={1.5} className="text-text-80 "></Clock>
+                <Text className="text-text-80 text-lg font-medium">
+                  00:11:11
+                </Text>
+              </View>
             </View>
           </View>
 
-          <View>
-            <ExerciseTable></ExerciseTable>
-          </View>
+          <View>{/* <ExerciseTable></ExerciseTable> */}</View>
 
           <View className="flex flex-col gap-6 px-5">
             <Button
@@ -68,7 +107,10 @@ export default function ActiveWorkout({
                 Add Exercises
               </Text>
             </Button>
-            <Button className="bg-error-30">
+            <Button
+              className="bg-error-30"
+              onPress={() => handleCancelWorkout()}
+            >
               <Text className="text-error text-lg font-semibold leading-[20px]">
                 Cancel Workout
               </Text>
